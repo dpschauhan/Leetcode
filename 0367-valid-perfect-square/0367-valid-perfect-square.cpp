@@ -1,6 +1,21 @@
 class Solution {
 public:
     bool isPerfectSquare(int num) {
+        // binary search
+        int s=1;
+        int e=num;
+        while(s<=e){
+            long long m=s+(e-s)/2;
+            if(m*m==num)return 1;
+            else if(m*m>num)e=m-1;
+            else{s=m+1;}
+        }
+        return 0;
+    }
+};
+class Solution3 {
+public:
+    bool isPerfectSquare(int num) {
         // On adding consecutive odd numbers we get next perfect square
         int i=1; 
         while (num > 0)
