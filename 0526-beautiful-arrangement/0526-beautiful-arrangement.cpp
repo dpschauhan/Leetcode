@@ -27,6 +27,31 @@ class Solution {
 public:
     int countArrangement(int n) {
         vector<bool> bitvec(n+1,true);
+        int p=0;
+        int all=0;
+        s(n,bitvec,p,all);
+        return all;
+    }
+private:
+    void s(int n,vector<bool> bitvec, int p,int& all){
+        if(p==n )all++;
+        else{
+            for(int i=1;i<=n;i++){
+                if(bitvec[i] && ((i%(p+1)==0 || ((p+1) %i==0)))){
+                    bitvec[i]=0;
+                    p++;
+                    s(n,bitvec,p,all);
+                    p--;
+                    bitvec[i]=1;
+                    }
+            }
+        }
+    }
+};
+class Solution2 {
+public:
+    int countArrangement(int n) {
+        vector<bool> bitvec(n+1,true);
         vector<int> p;
         int all=0;
         s(n,bitvec,p,all);
