@@ -19,6 +19,7 @@ public:
     }
 private:
     void s(TreeNode* root,const int ts,int ps,bool& ans ){
+        assert(root);
         if(!root->left && !root->right){
             if(ps==ts)ans=1;
         }
