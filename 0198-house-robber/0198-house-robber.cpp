@@ -11,7 +11,7 @@ public:
         return coinRow(nums,nums.size());
     }
 };
-class Solution {
+class Solution2 {
 public:
     int rob(vector<int>& nums) {
         vector<int> tbl(nums.size()+1);
@@ -20,6 +20,26 @@ public:
             tbl[n]=max(tbl[n-1],nums[n-1]+ tbl[n-2]);
         }
         return tbl[nums.size()];
+        
+    }
+};
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        vector<int> tbl(3);
+        tbl[0]=0 , tbl[1]=nums[0];
+        for (int n=2;n<=nums.size();n++){
+            tbl[n%3]=max(tbl[(n-1)%3],nums[n-1]+ tbl[(n-2)%3]);
+        }
+        return tbl[(nums.size())%3];
+        
+    }
+};
+
+class Solution4 {
+public:
+    int rob(vector<int>& nums) {
+        return 0;
         
     }
 };
