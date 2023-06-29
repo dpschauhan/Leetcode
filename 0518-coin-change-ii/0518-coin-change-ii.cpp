@@ -1,3 +1,4 @@
+
 // Backtracking - At least O(2^n)
 class Solution1 {
 public:
@@ -98,7 +99,7 @@ private:
 
 // Head Recursive ==> Memoization using 2D-Array
 // O(n * amount) time and space ==> 1.5 * 10^6 time
-class Solution {
+class Solution5 {
 public:
     int change(int amount, vector<int>& coins) {
         // unordered_map<string, int> tbl;
@@ -120,5 +121,27 @@ private:
                 ans += f1(i, a - coins[i], coins, tbl);
             return tbl[i][a] = ans;
         }
+    }
+};
+
+
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        int n= coins.size();
+        vector<vector<int>> tbl(coins.size()+1 , vector<int> (amount+1));
+        tbl[n][0]=1;
+        for(int j=1;j<=amount;j++)tbl[n][j]=0;
+
+        for(int i=n-1;i>=0;i--){
+            for(int a=0;a<=amount;a++){
+                tbl[i][a]=tbl[i+1][a];
+                if(a>=coins[i]){
+                    tbl[i][a]+=tbl[i][a-coins[i]];
+                }
+            }
+        }
+        return tbl[0][amount];
+
     }
 };
